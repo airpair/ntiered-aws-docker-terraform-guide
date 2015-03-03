@@ -67,9 +67,8 @@ It provides powerful primitives to elegantly define your infrastructure as code.
 
 In simple terms, terraforming begins with you describing the desired state of your infrastructure in a configuration file, it then generates an execution plan describing what it will do to reach that desired state. You can then choose to execute (or modify) the plan to build, remove or modify desired components.
 
-
-Settting up your workstation
------------------------------
+Preparing your workstation
+--------------------------
 
 You can install terraform using [Homebrew](http://brew.sh) on a Mac using ```brew update && brew install terraform```. 
 
@@ -94,8 +93,8 @@ Available commands are:
     version    Prints the Terraform version
 ```
 
-Setting your project directory
-------------------------------
+Your project directory
+----------------------
 
 Create a directory to host your project files. For our example, we will use `$HOME/infrastructure`, with the below structure:
 
@@ -107,8 +106,9 @@ Create a directory to host your project files. For our example, we will use `$HO
 ```
 
 ```sh
-$ mkdir -p $HOME/infrastructure/cloud-config $HOME/infrastructure/ssh $HOME/infrastructure/ssh
+$ mkdir -p $HOME/infrastructure
 $ cd $HOME/infrastructure
+$ mkdir -p cloud-config ssh bin
 ```
 
 Defining variables for your infrastructure
@@ -191,9 +191,6 @@ Parameters accepts string values that can be [interpolated](https://www.terrafor
 for access key will read the value from the user provided for variable ```access_key```. 
 
 You will see extensive usage of interpolation in the coming sections of this guide.
-
-Provisioning your VPC
----------------------
 
 Running `terraform apply` will create the VPC by prompting you to to input AWS access and secret keys, the output should look like look like the below. For default values, hitting `<return>` key will assign default values defined in the `variables.tf` file.
 
@@ -337,8 +334,8 @@ The `+` before `aws_internet_gateway.default` indicates that a new resource will
 
 After reviewing your plan, run `terraform apply` to create your resources. You can verify the subnet has been created by running `terraform show` or by visiting the aws console.  
 
-Create security groups
-----------------------
+Creating security groups
+------------------------
 
 We will creating 3 security groups:
 
@@ -622,7 +619,9 @@ output "elb.hostname" {
 
 Since we are not changing any values, run `terraform apply` to populate outputs in the state file. Inspect the `elb.hostname` by running:
 
+```sh
 $ open "http://$(terraform output elb.hostname)"
+```
 
 The above command will open a web browser. If you get an connection error, it is likely the DNS has not propogated in time and you should try again after a few minutes.
 
@@ -732,4 +731,4 @@ There is a lot more to Terraform than what was convered in this post, checkout [
 
 I hope you found this guide useful, I gave my best to keep the guide accurate and updated, if there is any part of the guide that you felt could use imporovement, please leave a comment and I will attend to it promptly. 
 
-I hope to continue to write more guides on various topics that I think will be useful to improve operational efficienty and readiness. You can reach me [Twitter at @kn0tch](https://twitter.com/kn0tch) if you have a recomendation for topic or want simply want stay connected, I'm usually active and always looking foward to a good conversation, come say hi!
+I hope to continue to write more guides on various topics that I think will be useful. If you have a recomendation for topic or want simply want stay connected, I'm on twitter [@kn0tch](https://twitter.com/kn0tch). I'm usually active and always looking foward to a good conversation, come say hi!
