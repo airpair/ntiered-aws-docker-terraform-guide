@@ -53,7 +53,7 @@ To summarize, we will be building the below components:
 - Application servers running nginx docker containers in a private subnet
 - Load balancers in the public subnet to manage and route web traffic to app servers
 
-Although all the above mentioned components can be built and managed using the native AWS web console, it makes your infrastructure operationally vulnerable to changes and surprises. 
+Although all the above mentioned components can be built and managed using the native AWS web console, building it such way leaves your infrastructure vulnerable to operationally changes and surprises. 
 
 Automating the building, changing, and versioning your infrastructure safely and efficiently increases your operational readiness exponentially. It allows you move at an higher velocity you grow your infrastructure. 
 
