@@ -55,7 +55,7 @@ To summarize, we will be building the below components:
 
 Although all the above mentioned components can be built and managed using the native AWS web console, building it such way leaves your infrastructure vulnerable to operationally changes and surprises. 
 
-Automating the building, changing, and versioning your infrastructure safely and efficiently increases your operational readiness exponentially. It allows you move at an higher velocity you grow your infrastructure. 
+Automating the building, changing, and versioning your infrastructure safely and efficiently increases your operational readiness exponentially. It allows you move at an higher velocity as you grow and evolve your infrastructure. 
 
 Infrastructure as code lays the foundation for agility that aligns with your product develop efforts opens a path way to easily scale to many types of clouds to manage heterogeneous information systems.
 
