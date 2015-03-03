@@ -18,7 +18,7 @@ I kept the scope limited to building a private network and did not cover applica
 
 As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr
 
-By the end, to demonstrate the disposable nature of infstrasture-of-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
+By the end, to demonstrate the disposable nature of infstrasture-as-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
 
 Please have the below ready before we begin:
 
@@ -62,7 +62,7 @@ Infrastructure as code lays the foundation for agility that aligns with your pro
 The Terraform Way
 -----------------
 
-[Terraform](https://www.terraform.io) is automation tool for the cloud from [Hashicorp](https://hashicorp.com) (Creators of [Vagrant](https://www.vagrantup.com), [Consul](https://www.consul.io) and many more sysadmin favorites).
+[Terraform](https://www.terraform.io) is an automation tool for the cloud from [Hashicorp](https://hashicorp.com) (Creators of [Vagrant](https://www.vagrantup.com), [Consul](https://www.consul.io) and many more sysadmin favorites).
 
 It provides powerful primitives to elegantly define your infrastructure as code. It’s simple yet powerful syntax to describe infrastructure components allow you to build complex, version controlled, collaborative, heterogeneous and disposable systems at a very high productivity.
 
