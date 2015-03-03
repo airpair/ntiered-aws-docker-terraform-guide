@@ -61,7 +61,7 @@ Infrastructure as code lays the foundation for agility that aligns with your pro
 The Terraform Way
 -----------------
 
-[Terraform](https://www.terraform.io) is automation tool for the cloud from creators of Vagrant, [Hashicorp](https://hashicorp.com) (Creators of [Vagrant](https://www.vagrantup.com), [Consul](https://www.consul.io) and many more sysadmin favorites).
+[Terraform](https://www.terraform.io) is automation tool for the cloud from from [Hashicorp](https://hashicorp.com) (Creators of [Vagrant](https://www.vagrantup.com), [Consul](https://www.consul.io) and many more sysadmin favorites).
 
 It provides powerful primitives to elegantly define your infrastructure as code. It’s simple yet powerful syntax to describe infrastructure components allow you to build complex, version controlled, collaborative, heterogeneous and disposable systems at a very high productivity.
 
