@@ -24,8 +24,8 @@ Please have the below ready before we begin:
 - AWS access and secret keys to an active AWS account.
 - A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like cygwin.
 
-What we will be building
-------------------------
+The Private Network
+-------------------
 
 We will essentially be building a Virtual Private Cloud (VPC) on AWS along with a public and a private subnet (sub-networks) pair. 
 
