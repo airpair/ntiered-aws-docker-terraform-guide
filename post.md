@@ -1,36 +1,38 @@
+Guide to automating a multi-tiered application securely on AWS with Docker and Terraform.
+=========================================================================================
+
 Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing the transportation of data is a fundamental requirement for a secure network. 
 
-While there are server transport level protocols to secure the transmission, connecting networked resource in a private network is the most basic and common way to keep our data secure.
+While there are serval transport level protocols available for encrypting communications, communicating privately in a closed network is the most common and efficient way to keep data secure.
 
-I wrote this in guide in an attempt to to help you a build such a network on AWS along with a secure way to access them using a VPN. 
-
-I kept the scope limited to building the private network and did not cover application and OS level security which are also equally important.
-
-This is a technical guide, the audiences this guide is intended for are:
-
-- Developers with little or no system administration experience wanting to deploy applications on AWS.
-- System administrators wanting to understand automation.
-
-A basic level of linux command line knowledge is required as well.
+I wrote this guide in an attempt to help the reader build such a network on AWS along with a secure way to access it’s resources using a VPN.
 
 Before we begin
 ---------------
 
-As you walk thru various sections of this guide, you will be creating real network resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide.
+This is a technical guide and the reader is expected to have basic level of linux command line knowledge. The audiences this guide is intended for are:
+
+- Application developers with little or no systems administration experience and wanting to deploy applications on AWS.
+- System administrators with little of no experience with infrastructure automation and wanting to learn more.
+- Any one that wants to get a feel for the current state of cloud automation tooling.
+
+I kept the scope limited to building a private network and did not cover application and OS level security which are also equally important.
+
+As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr
 
 By the end, to demonstrate the disposable nature of infstrasture-of-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
 
 Please have the below ready before we begin:
 
-- AWS access and secret keys to an active AWS account
-- A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like cygwin
+- AWS access and secret keys to an active AWS account.
+- A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like cygwin.
 
 What we will be building
 ------------------------
 
 We will essentially be building a Virtual Private Cloud (VPC) on AWS along with a public and a private subnet (sub-networks) pair. 
 
-Instances in the private subnet cannot directly access the internet thereby making the the subnet an ideal place for application and database servers. 
+Instances in the private subnet cannot directly access the internet thereby making the subnet an ideal place for application and database servers. 
 
 During the course of this tutorial, we will be creating our application instances in the private subnet. The private subnet will also be where you should be hosting application support instances like database instances, cache servers, log hosts, build servers, configuration stores etc. Instances in the private subnet rely on a Network Address Translation (NAT) server running in the public subnet to connect to the internet. 
 
