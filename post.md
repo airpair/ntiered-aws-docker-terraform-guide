@@ -1,16 +1,17 @@
-Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing the transportation of data is a fundamental requirement for a secure network. 
+Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing its transportation is a fundamental requirement for a secure network. 
 
-While there are serval transport level protocols available for encrypting communications, communicating privately in a closed network is the most common and efficient way to keep data secure.
+While there are serval transport level protocols available for encrypting the transit, communicating privately in a closed network is the most common and efficient way to keep data secure.
 
 I wrote this guide in an attempt to help the reader build such a network on AWS along with a secure way to access it’s resources using a VPN.
 
 Before we begin
 ---------------
 
-This is a technical guide and the reader is expected to have basic level of linux command line knowledge. The audiences this guide is intended for are:
-
+This is a technical guide and the reader is expected to have a basic linux command line knowledge. The audience this guide is intended for:
+ 
 - Application developers with little or no systems administration experience and wanting to deploy applications on AWS.
-- System administrators with little of no experience with infrastructure automation and wanting to learn more.
+- System administrators with little or no experience with infrastructure automation and wanting to learn more.
+- Infrastructure automation engineers that want to explore cloud provider resource automation.
 - Any one that wants to get a feel for the current state of cloud automation tooling.
 
 I kept the scope limited to building a private network and did not cover application and OS level security which are also equally important.
@@ -27,11 +28,11 @@ Please have the below ready before we begin:
 The Private Network
 -------------------
 
-We will essentially be building a Virtual Private Cloud (VPC) on AWS along with a public and a private subnet (sub-networks) pair. 
+During the course of this tutorial, we will essentially be building a Virtual Private Cloud (VPC) on AWS along with a public and a private subnet (sub-networks) pair. 
 
 Instances in the private subnet cannot directly access the internet thereby making the subnet an ideal place for application and database servers. 
 
-During the course of this tutorial, we will be creating our application instances in the private subnet. The private subnet will also be where you should be hosting application support instances like database instances, cache servers, log hosts, build servers, configuration stores etc. Instances in the private subnet rely on a Network Address Translation (NAT) server running in the public subnet to connect to the internet. 
+We will also be building two application instances that reside in the private subnet. The private subnet will also be where you should be hosting application support instances like database instances, cache servers, log hosts, build servers, configuration stores etc. Instances in the private subnet rely on a Network Address Translation (NAT) server running in the public subnet to connect to the internet. 
 
 All Instances in the public subnet can transmit inbound and outbound traffic to and from the internet, the routing resources such as load balancers, vpn and nat servers reside in this subnet. 
 
