@@ -729,6 +729,6 @@ Conclusion
 
 There is a lot more to Terraform than what was convered in this post, checkout [terraform.io](https://terraform.io) and the [github project](http://github.com/hashicorp/terraform) to see more this amazing tool.
 
-I hope you found this guide useful, I gave my best to keep the guide accurate and updated, if there is any part of the guide that you felt could use imporovement, please leave a comment and I will attend to it promptly. 
+I hope you found this guide useful, I gave my best to keep the it accurate and updated, if there is any part of the guide that you felt could use imporovement, please leave a comment and I will attend to it promptly. 
 
-I hope to continue to write more guides on various topics that I think will be useful. If you have a recomendation for topic or want simply want stay connected, I'm on twitter [@kn0tch](https://twitter.com/kn0tch). I'm usually active and always looking foward to a good conversation, come say hi!
+I'm hoping to continue to write more guides on various topics that I think will be useful. If you have a recomendation for topic or want simply want stay connected, I'm on twitter [@kn0tch](https://twitter.com/kn0tch). I'm usually active and always looking foward to a good conversation, come say hi!
