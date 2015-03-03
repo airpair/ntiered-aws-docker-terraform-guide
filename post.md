@@ -1,6 +1,3 @@
-Guide to automating a multi-tiered application securely on AWS with Docker and Terraform.
-=========================================================================================
-
 Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing the transportation of data is a fundamental requirement for a secure network. 
 
 While there are serval transport level protocols available for encrypting communications, communicating privately in a closed network is the most common and efficient way to keep data secure.
