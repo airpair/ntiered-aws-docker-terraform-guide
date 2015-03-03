@@ -36,9 +36,9 @@ We will also be building two application instances that reside in the private su
 
 All Instances in the public subnet can transmit inbound and outbound traffic to and from the internet, the routing resources such as load balancers, vpn and nat servers reside in this subnet. 
 
-The NAT server will also run a OpenVPN server, a full-featured SSL VPN which implements OSI layer 3 secure network extension using the industry standard SSL/TLS protocol over a UDP encapsulated network.
+The NAT server we will be building will also run an OpenVPN server. Its a full-featured SSL VPN which implements OSI layer 3 secure network extension using the industry standard SSL/TLS protocol over a UDP encapsulated network.
 
-In the later part of this guide, we will connect to our private networking using this VPN server using a compatible OpenVPN client. On a Mac, [Viscosity for Mac](https://www.sparklabs.com/viscosity) is a good commercial client and my personal favorite. [Tunnelblick](https://code.google.com/p/tunnelblick/) a open-source client that’s compatible too. 
+In the later part of this guide, we will connect to our private network using via this VPN server using a compatible OpenVPN client. On a Mac, [Viscosity](https://www.sparklabs.com/viscosity) is a good commercial client and my personal favorite. [Tunnelblick](https://code.google.com/p/tunnelblick/) is free and open-source client that’s compatible too. 
 
 For other operating systems, see [openvpn clients page](https://openvpn.net/index.php/access-server/docs/admin-guides/182-how-to-connect-to-access-server-with-linux-clients.html) for a list.
 
