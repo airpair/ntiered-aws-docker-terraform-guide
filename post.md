@@ -1,44 +1,44 @@
-Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing its transportation is a fundamental requirement for a secure network. 
+Data, a crucial part of any infrastructure, is particularly vulnerable while traveling over the Internet. Securing its transportation is a fundamental requirement for establishing a trusted network. 
 
 While there are several transport level protocols available for encrypting the transmission, communicating privately in a closed network is the most common and efficient way to keep data secure.
 
-I wrote this guide in an attempt to help the reader build such a network on AWS along with a secure way to access it’s resources using a VPN.
+I wrote this guide in an attempt to help the reader to build a closed private network on AWS and to establish a secure way to access network resources, using a trusted VPN.
 
 Before we begin
 ---------------
 
-This is a technical guide and the reader is expected to have a basic linux command line knowledge. The audience this guide is intended for:
+This is a technical guide, best accessible to a reader with basic linux command line knowledge. The Audience this guide is intended for includes:
  
-- Application developers with little or no systems administration experience and wanting to deploy applications on AWS.
-- System administrators with little or no experience with infrastructure automation and wanting to learn more.
-- Infrastructure automation engineers that want to explore cloud provider resource automation.
-- Any one that wants to get a feel for the current state of cloud automation tooling.
+- Application developers with little or no systems administration experience, wanting to deploy applications on AWS
+- System administrators with little or no experience with infrastructure automation, wanting to learn more
+- Infrastructure automation engineers that want to explore cloud resource automation
+- Anyone who wants to get a feel for the current state of cloud automation tooling
 
-I kept the scope limited to building a private network and did not cover application and OS level security which are also equally important.
+I kept the scope limited to building a private network and did not cover application and OS level security, which are equally important.
 
-As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr.
+As you follow the various steps in this guide, you will be creating real AWS resources, which cost money. I did my best to keep the utilization footprint minimal, using the least possible configuration. I estimate less than hour to complete all the steps in this guide, at $0.079/hr.
 
-By the end, to demonstrate the disposable nature of infrastructure-as-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
+By the end, to demonstrate the disposable nature of infrastructure-as-code, you will be destroying all infrastructure components that were created during the course of this tutorial.
 
-I have uploaded all the source code you will be writing to a [github repo](https://github.com/airpair/ntiered-aws-docker-terraform-guide/tree/master/terraform), its avaiable for reference incase you feel like you are lost.
+I have uploaded the source code you will be writing to a [github repo](https://github.com/airpair/ntiered-aws-docker-terraform-guide/tree/master/terraform), it is available for reference in case you feel lost.
 
 Please have the below ready before we begin:
 
 - AWS access and secret keys to an active AWS account.
-- A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like Cygwin.
+- A Unix flavored workstation with internet connection; most commands will work on Windows with a shell emulator like Cygwin.
 
 The Private Network
 -------------------
 
-During the course of this tutorial, we will essentially be building a Virtual Private Cloud (VPC) on AWS along with a public and a private subnet (sub-networks) pair. 
+During the course of this tutorial, we will be building a Virtual Private Cloud (VPC) on AWS along with a public-private subnet (sub-networks) pair. 
 
-Instances in the private subnet cannot directly access the internet thereby making the subnet an ideal place for application and database servers. 
+Instances in the private subnet cannot directly access the internet, making them an ideal for hosting critical resources such as application and database servers.
 
-We will also be building two application instances that reside in the private subnet. The private subnet will also be where you should be hosting application support instances like database instances, cache servers, log hosts, build servers, configuration stores etc. Instances in the private subnet rely on a Network Address Translation (NAT) server running in the public subnet to connect to the internet. 
+In the private subnet, we will be building two application server instances. The private subnet will also be where you should host application support instances like database servers, cache servers, log hosts, build servers and configuration stores. Instances in the private subnet rely on a Network Address Translation (NAT) server, running in the public subnet to connect to the internet. 
 
-All Instances in the public subnet can transmit inbound and outbound traffic to and from the internet, the routing resources such as load balancers, vpn and nat servers reside in this subnet. 
+All Instances in the public subnet can transmit inbound and outbound traffic to and from the internet. The routing resources such as load balancers, VPN and NAT servers reside in this subnet.
 
-The NAT server we will be building will also run an OpenVPN server. Its a full-featured SSL VPN which implements OSI layer 3 secure network extension using the industry standard SSL/TLS protocol over a UDP encapsulated network.
+The NAT server we are building will also run an OpenVPN server. OpenVPN is a full-featured SSL VPN, which implements OSI layer 3 secure network extension using the industry standard SSL/TLS protocol. It provides an encrypted UDP encapsulated tunnel to connect with instances in the private network from your workstation.
 
 In the later part of this guide, we will connect to our private network using via this VPN server using a compatible OpenVPN client. On a Mac, [Viscosity](https://www.sparklabs.com/viscosity) is a good commercial client and my personal favorite. [Tunnelblick](https://code.google.com/p/tunnelblick/) is free and open-source client that’s compatible too. 
 
