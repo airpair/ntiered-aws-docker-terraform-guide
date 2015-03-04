@@ -16,9 +16,11 @@ This is a technical guide and the reader is expected to have a basic linux comma
 
 I kept the scope limited to building a private network and did not cover application and OS level security which are also equally important.
 
-As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr
+As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr.
 
 By the end, to demonstrate the disposable nature of infrastructure-as-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
+
+I have uploaded all the source code you will be writing to a [github repo](https://github.com/airpair/ntiered-aws-docker-terraform-guide/tree/master/terraform), its avaiable for reference incase you feel like you are lost.
 
 Please have the below ready before we begin:
 
