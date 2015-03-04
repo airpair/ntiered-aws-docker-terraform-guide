@@ -1,6 +1,6 @@
 Data is a crucial part of our infrastructure and particularly vulnerable while it is traveling over the Internet. Securing its transportation is a fundamental requirement for a secure network. 
 
-While there are serval transport level protocols available for encrypting the transit, communicating privately in a closed network is the most common and efficient way to keep data secure.
+While there are several transport level protocols available for encrypting the transmission, communicating privately in a closed network is the most common and efficient way to keep data secure.
 
 I wrote this guide in an attempt to help the reader build such a network on AWS along with a secure way to access it’s resources using a VPN.
 
