@@ -1,0 +1,4 @@
+.DS_Store
+*.tfvars
+*.tfstate*
+*.ovpn
