@@ -18,12 +18,12 @@ I kept the scope limited to building a private network and did not cover applica
 
 As you walk thru various sections of this guide, you will be creating real aws resources that cost money. I did my best to keep the utilization footprint to the lowest possible configuration and I estimate less than hour to complete all the steps in this guide at $0.079/hr
 
-By the end, to demonstrate the disposable nature of infstrasture-as-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
+By the end, to demonstrate the disposable nature of infrastructure-as-code, we will be destroying all the infrastructure components that were created during the course of this tutorial.
 
 Please have the below ready before we begin:
 
 - AWS access and secret keys to an active AWS account.
-- A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like cygwin.
+- A unix/linux workstation with internet connection, almost all commands will work on Windows too with a shell emulator like Cygwin.
 
 The Private Network
 -------------------
@@ -124,7 +124,7 @@ variable "access_key" {
 }
 
 variable "secret_key" { 
-  description = "AWS secert access key"
+  description = "AWS secret access key"
 }
 
 variable "region"     { 
@@ -205,7 +205,7 @@ var.access_key
 ...
 
 var.secret_key
-  AWS secert access key
+  AWS secret access key
 
   Enter a value: bar
 
@@ -496,7 +496,7 @@ Terraform provides a set of [provisioning options](https://www.terraform.io/docs
 Create private subnet and configure routing
 -------------------------------------------
 
-Create a private subnet with a CIDR range of 10.128.1.0/24 and configure the routing table to route all traffic via the nat. Append 'main.tf' with the below config:
+Create a private subnet with a CIDR range of 10.128.1.0/24 and configure the routing table to route all traffic via the nat. Create ‘private-subnets.tf' file with the below config:
 
 ```
 /* Private subnet */
@@ -536,7 +536,7 @@ Adding app instances and a load balancer
 
 Lets add two app servers running nginx containers in the private subnet and configure a load balancer in the public subnet. 
 
-The app servers are not accessible directly from the internet and can be accessed via the VPN. Since we haven't configured our VPN yet to access the instances, we will provision the instances using by bootrapping `cloud-init` yaml file via the ```user_data``` parameter.
+The app servers are not accessible directly from the internet and can be accessed via the VPN. Since we haven't configured our VPN yet to access the instances, we will provision the instances using by bootstrapping `cloud-init` yaml file via the ```user_data``` parameter.
 
 `cloud-init` is a defacto multi-distribution package that handles early initialization of a cloud instance. You can see various examples [in the documentation](http://cloudinit.readthedocs.org/en/latest/topics/examples.html)
 
@@ -593,7 +593,7 @@ You read more about using count in resources at [terraform variable documentatio
 
 Run ```terraform plan``` and ```terraform apply```
 
-Allowing generated configuration to be easily accessable to other programs
+Allowing generated configuration to be easily accessible to other programs
 --------------------------------------------------------------------------
 
 Terraform allows for defining output to templates, output variables can be accessed by running ```terraform output VARIABLE```.
@@ -624,7 +624,7 @@ Since we are not changing any values, run `terraform apply` to populate outputs 
 $ open "http://$(terraform output elb.hostname)"
 ```
 
-The above command will open a web browser. If you get an connection error, it is likely the DNS has not propogated in time and you should try again after a few minutes.
+The above command will open a web browser. If you get an connection error, it is likely the DNS has not propagated in time and you should try again after a few minutes.
 
 Configure OpenVPN server and generate client config
 ---------------------------------------------------
@@ -709,7 +709,7 @@ $ ssh -t -i ssh/insecure-deployer "ubuntu@$(terraform output app.1.ip)"
 Teardown infrastructure
 -----------------------
 
-Destroy our infructure by running `destroy` command and answering with `yes` for confimation, make sure to disconnect from the VPN to be retain internet connection:
+Destroy our infrastructure by running `destroy` command and answering with `yes` for confirmation, make sure to disconnect from the VPN to be retain internet connection:
 
 ```sh
 $ terraform destroy
@@ -728,8 +728,8 @@ Apply complete! Resources: 0 added, 0 changed, 16 destroyed.
 Conclusion
 ----------
 
-There is a lot more to Terraform than what was convered in this post, checkout [terraform.io](https://terraform.io) and the [github project](http://github.com/hashicorp/terraform) to see more this amazing tool.
+There is a lot more to Terraform than what is covered in this post, checkout [terraform.io](https://terraform.io) and the [github project](http://github.com/hashicorp/terraform) to see more of this awesome tool.
 
-I hope you found this guide useful, I gave my best to keep the it accurate and updated, if there is any part of the guide that you felt could use imporovement, please leave a comment and I will attend to it promptly. 
+I hope you found this guide useful, I gave my best to keep the it accurate and updated, if there is any part of the guide that you felt could use improvement, please leave a comment and I will attend to it promptly. 
 
-I'm hoping to continue to write more guides on various topics that I think will be useful. If you have a recomendation for topic or want simply want stay connected, I'm on twitter [@kn0tch](https://twitter.com/kn0tch). I'm usually active and always looking foward to a good conversation, come say hi!
+I'm hoping to continue to write more guides on various topics that I think will be useful. If you have a recommendation for topic or want simply want stay connected, I'm on twitter [@kn0tch](https://twitter.com/kn0tch). I'm usually active and always looking forward to a good conversation, come say hi!
