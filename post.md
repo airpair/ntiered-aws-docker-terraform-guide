@@ -20,7 +20,7 @@ As you follow the various steps in this guide, you will be creating real AWS res
 
 By the end, to demonstrate the disposable nature of infrastructure-as-code, you will be destroying all infrastructure components that were created during the course of this tutorial.
 
-I have uploaded the source code you will be writing to a [github repo](https://github.com/airpair/ntiered-aws-docker-terraform-guide/tree/master/terraform), it is available for reference in case you feel lost.
+I have uploaded the source code you will be writing to a [github repo](https://github.com/airpair/ntiered-aws-docker-terraform-guide/tree/edit/terraform), it is available for reference in case you feel lost.
 
 Please have the below ready before we begin:
 
@@ -34,13 +34,13 @@ During the course of this tutorial, we will be building a Virtual Private Cloud 
 
 Instances in the private subnet cannot directly access the internet, making them an ideal for hosting critical resources such as application and database servers.
 
-In the private subnet, we will be building two application server instances. The private subnet will also be where you should host application support instances like database servers, cache servers, log hosts, build servers and configuration stores. Instances in the private subnet rely on a Network Address Translation (NAT) server, running in the public subnet to connect to the internet. 
+In the private subnet, we will be building two application server instances. The private subnet will also be where you should host application support instances like database servers, cache servers, log hosts, build servers and configuration stores. Instances in the private subnet rely on a Network Address Translation (NAT) server, running in the public subnet for internet connectivity. 
 
 All Instances in the public subnet can transmit inbound and outbound traffic to and from the internet. The routing resources such as load balancers, VPN and NAT servers reside in this subnet.
 
 The NAT server we are building will also run an OpenVPN server. OpenVPN is a full-featured SSL VPN, which implements OSI layer 3 secure network extension using the industry standard SSL/TLS protocol. It provides an encrypted UDP encapsulated tunnel to connect with instances in the private network from your workstation.
 
-In the later part of this guide, we will connect to our private network using via this VPN server using a compatible OpenVPN client. On a Mac, [Viscosity](https://www.sparklabs.com/viscosity) is a good commercial client and my personal favorite. [Tunnelblick](https://code.google.com/p/tunnelblick/) is free and open-source client that’s compatible too. 
+In the later part of this guide, we will connect to our private network using via this VPN server and a compatible OpenVPN client. On a Mac, [Viscosity](https://www.sparklabs.com/viscosity) is a good commercial client and my personal favorite. [Tunnelblick](https://code.google.com/p/tunnelblick/) is free and open-source client that’s compatible too. 
 
 For other operating systems, see [openvpn clients page](https://openvpn.net/index.php/access-server/docs/admin-guides/182-how-to-connect-to-access-server-with-linux-clients.html) for a list.
 
@@ -49,13 +49,13 @@ To summarize, we will be building the below components:
 - VPC
 - Internet Gateway for public subnet
 - Public subnet for routing instances
-- Private subnet for application resources
+- Private subnet for internal resources
 - Routing tables for public and private subnets
 - NAT/VPN server to route outbound traffic from your instances in private network and provide your workstation secure access to network resources.
 - Application servers running nginx docker containers in a private subnet
 - Load balancers in the public subnet to manage and route web traffic to app servers
 
-Although all the above mentioned components can be built and managed using the native AWS web console, building it such way leaves your infrastructure vulnerable to operationally changes and surprises. 
+Although all the above mentioned components can be built and managed using the native AWS web console, building it such way leaves your infrastructure vulnerable to operationally changes and surprises.
 
 Automating the building, changing, and versioning your infrastructure safely and efficiently increases your operational readiness exponentially. It allows you move at an higher velocity as you grow and evolve your infrastructure. 
 
