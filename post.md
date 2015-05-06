@@ -582,7 +582,7 @@ runcmd:
   # Install docker
   - curl -sSL https://get.docker.com/ubuntu/ | sudo sh
   # Run nginx
-  - docker run -d -p 80:80 dockerfile/nginx
+  - docker run -d -p 80:80 nginx
 
 ```
 
