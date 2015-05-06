@@ -370,6 +370,13 @@ resource "aws_security_group" "default" {
     self        = true
   }
   
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    self        = true
+  }
+  
   tags { 
     Name = "airpair-example-default-vpc" 
   }
