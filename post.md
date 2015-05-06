@@ -378,7 +378,7 @@ resource "aws_security_group" "default" {
 /* Security group for the nat server */
 resource "aws_security_group" "nat" {
   name = "nat-airpair-example"
-  description = "Security group for nat instances that allows SSH and VPN traffic from internet"
+  description = "Security group for nat instances that allows SSH and VPN traffic from internet. Also allows outbound HTTP[S]"
   vpc_id = "${aws_vpc.default.id}"
   
   ingress {
@@ -394,7 +394,22 @@ resource "aws_security_group" "nat" {
     protocol  = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
+  egress {
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
   tags { 
     Name = "nat-airpair-example" 
   }
