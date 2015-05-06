@@ -442,7 +442,7 @@ Create SSH Key Pair
 We will need an SSH key to be bootstrapped on the newly created instances to be able to login. Make sure you have the `ssh` directory and generate a new key by running:
 
 ```sh
-$ sh-keygen -t rsa -C "insecure-deployer" -P '' -f ssh/insecure-deployer
+$ ssh-keygen -t rsa -C "insecure-deployer" -P '' -f ssh/insecure-deployer
 ```
 
 The above command will create a public-private key pair in the `ssh` directory. This is an insecure key and should be replaced after the instance is bootstrapped.
