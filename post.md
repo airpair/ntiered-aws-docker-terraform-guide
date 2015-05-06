@@ -484,7 +484,7 @@ resource "aws_instance" "nat" {
   provisioner "remote-exec" {
     inline = [
       "sudo iptables -t nat -A POSTROUTING -j MASQUERADE",
-      "echo 1 > /proc/sys/net/ipv4/conf/all/forwarding",
+      "echo 1 | sudo tee /proc/sys/net/ipv4/conf/all/forwarding > /dev/null",
       /* Install docker */ 
       "curl -sSL https://get.docker.com/ubuntu/ | sudo sh",
       /* Initialize open vpn data container */
