@@ -447,7 +447,7 @@ $ ssh-keygen -t rsa -C "insecure-deployer" -P '' -f ssh/insecure-deployer
 
 The above command will create a public-private key pair in the `ssh` directory. This is an insecure key and should be replaced after the instance is bootstrapped.
 
-Create a new file `key-pairs.sh` with the below configuration and register the newly generated SSH key pair by running`terraform plan` and `terraform apply`.
+Create a new file `key-pairs.tf` with the below configuration and register the newly generated SSH key pair by running`terraform plan` and `terraform apply`.
 
 ```
 resource "aws_key_pair" "deployer" {
