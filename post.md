@@ -370,6 +370,13 @@ resource "aws_security_group" "default" {
     self        = true
   }
   
+  egress {
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    self        = true
+  }
+  
   tags { 
     Name = "airpair-example-default-vpc" 
   }
@@ -378,7 +385,7 @@ resource "aws_security_group" "default" {
 /* Security group for the nat server */
 resource "aws_security_group" "nat" {
   name = "nat-airpair-example"
-  description = "Security group for nat instances that allows SSH and VPN traffic from internet"
+  description = "Security group for nat instances that allows SSH and VPN traffic from internet. Also allows outbound HTTP[S]"
   vpc_id = "${aws_vpc.default.id}"
   
   ingress {
@@ -394,7 +401,22 @@ resource "aws_security_group" "nat" {
     protocol  = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
+  egress {
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
   tags { 
     Name = "nat-airpair-example" 
   }
@@ -442,12 +464,12 @@ Create SSH Key Pair
 We will need an SSH key to be bootstrapped on the newly created instances to be able to login. Make sure you have the `ssh` directory and generate a new key by running:
 
 ```sh
-$ sh-keygen -t rsa -C "insecure-deployer" -P '' -f ssh/insecure-deployer
+$ ssh-keygen -t rsa -C "insecure-deployer" -P '' -f ssh/insecure-deployer
 ```
 
 The above command will create a public-private key pair in the `ssh` directory. This is an insecure key and should be replaced after the instance is bootstrapped.
 
-Create a new file `key-pairs.sh` with the below configuration and register the newly generated SSH key pair by running`terraform plan` and `terraform apply`.
+Create a new file `key-pairs.tf` with the below configuration and register the newly generated SSH key pair by running`terraform plan` and `terraform apply`.
 
 ```
 resource "aws_key_pair" "deployer" {
@@ -484,7 +506,7 @@ resource "aws_instance" "nat" {
   provisioner "remote-exec" {
     inline = [
       "sudo iptables -t nat -A POSTROUTING -j MASQUERADE",
-      "echo 1 > /proc/sys/net/ipv4/conf/all/forwarding",
+      "echo 1 | sudo tee /proc/sys/net/ipv4/conf/all/forwarding > /dev/null",
       /* Install docker */ 
       "curl -sSL https://get.docker.com/ubuntu/ | sudo sh",
       /* Initialize open vpn data container */
@@ -560,7 +582,7 @@ runcmd:
   # Install docker
   - curl -sSL https://get.docker.com/ubuntu/ | sudo sh
   # Run nginx
-  - docker run -d -p 80:80 dockerfile/nginx
+  - docker run -d -p 80:80 nginx
 
 ```
 
