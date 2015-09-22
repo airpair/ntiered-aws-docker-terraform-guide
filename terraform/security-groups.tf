@@ -10,9 +10,16 @@ resource "aws_security_group" "default" {
     protocol    = "-1"
     self        = true
   }
-  
-  tags { 
-    Name = "airpair-example-default-vpc" 
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+  tags {
+    Name = "airpair-example-default-vpc"
   }
 }
 
@@ -36,9 +43,16 @@ resource "aws_security_group" "nat" {
     protocol  = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
-  tags { 
-    Name = "nat-airpair-example" 
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+  tags {
+    Name = "nat-airpair-example"
   }
 }
 
