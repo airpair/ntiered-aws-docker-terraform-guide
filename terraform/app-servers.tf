@@ -24,5 +24,13 @@ resource "aws_elb" "app" {
     lb_port = 80
     lb_protocol = "http"
   }
+  health_check {
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 5
+    target = "HTTP:80/"
+    interval = 15
+  }
+
   instances = ["${aws_instance.app.*.id}"]
 }
