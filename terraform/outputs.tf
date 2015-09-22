@@ -6,6 +6,10 @@ output "app.1.ip" {
   value = "${aws_instance.app.1.private_ip}"
 }
 
+/*output "appservers" {
+    value = "${join(",", aws_instance.app.*.private_ip)}"
+}*/
+
 output "nat.ip" {
   value = "${aws_instance.nat.public_ip}"
 }
