@@ -9,13 +9,13 @@ resource "aws_instance" "app" {
   source_dest_check = false
   user_data = "${file(\"cloud-config/app.yml\")}"
   tags = { 
-    Name = "airpair-example-app-${count.index}"
+    Name = "meetup-example-app-${count.index}"
   }
 }
 
 /* Load balancer */
 resource "aws_elb" "app" {
-  name = "airpair-example-elb"
+  name = "meetup-example-elb"
   subnets = ["${aws_subnet.public.id}"]
   security_groups = ["${aws_security_group.default.id}", "${aws_security_group.web.id}"]
   listener {
