@@ -1,1 +1,0 @@
-This repo contains [Terraform](https://terraform.io) configuration files and related source code used in [Guide to automating a multi-tiered application securely on AWS with Docker and Terraform](https://www.airpair.com/aws/posts/ntiered-aws-docker-terraform-guide) examples.

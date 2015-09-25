@@ -1,6 +1,6 @@
 /* Default security group */
 resource "aws_security_group" "default" {
-  name = "default-airpair-example"
+  name = "default-meetup-example"
   description = "Default security group that allows inbound and outbound traffic from all instances in the VPC"
   vpc_id = "${aws_vpc.default.id}"
   
@@ -10,16 +10,23 @@ resource "aws_security_group" "default" {
     protocol    = "-1"
     self        = true
   }
-  
-  tags { 
-    Name = "airpair-example-default-vpc" 
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+  tags {
+    Name = "meetup-example-default-vpc"
   }
 }
 
 
 /* Security group for the nat server */
 resource "aws_security_group" "nat" {
-  name = "nat-airpair-example"
+  name = "nat-meetup-example"
   description = "Security group for nat instances that allows SSH and VPN traffic from internet"
   vpc_id = "${aws_vpc.default.id}"
   
@@ -36,15 +43,22 @@ resource "aws_security_group" "nat" {
     protocol  = "udp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
-  tags { 
-    Name = "nat-airpair-example" 
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+}
+
+  tags {
+    Name = "nat-meetup-example"
   }
 }
 
 /* Security group for the web */
 resource "aws_security_group" "web" {
-  name = "web-airpair-example"
+  name = "web-meetup-example"
   description = "Security group for web that allows web traffic from internet"
   vpc_id = "${aws_vpc.default.id}"
   
@@ -63,6 +77,6 @@ resource "aws_security_group" "web" {
   }
   
   tags { 
-    Name = "web-airpair-example" 
+    Name = "web-meetup-example" 
   }
 }
