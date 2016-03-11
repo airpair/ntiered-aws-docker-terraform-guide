@@ -18,7 +18,7 @@ resource "aws_instance" "nat" {
       "sudo iptables -t nat -A POSTROUTING -j MASQUERADE",
       "echo 1 > /proc/sys/net/ipv4/conf/all/forwarding",
       /* Install docker */ 
-      "curl -sSL https://get.docker.com/ubuntu/ | sudo sh",
+      "curl -sSL https://get.docker.com | sudo sh",
       /* Initialize open vpn data container */
       "sudo mkdir -p /etc/openvpn",
       "sudo docker run --name ovpn-data -v /etc/openvpn busybox",
