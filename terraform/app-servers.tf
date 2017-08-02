@@ -4,7 +4,7 @@ resource "aws_instance" "app" {
   ami = "${lookup(var.amis, var.region)}"
   instance_type = "t2.micro"
   subnet_id = "${aws_subnet.private.id}"
-  security_groups = ["${aws_security_group.default.id}"]
+  vpc_security_group_ids = ["${aws_security_group.default.id}"]
   key_name = "${aws_key_pair.deployer.key_name}"
   source_dest_check = false
   user_data = "${file(\"cloud-config/app.yml\")}"
